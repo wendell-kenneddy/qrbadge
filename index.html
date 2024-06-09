@@ -18,16 +18,18 @@
       <h1 class="text-xl font-bold">QRBadge</h1>
     </header>
 
-    <main class="w-[90vw] max-w-[450px] mt-4 mx-auto">
+    <main class="w-[90vw] max-w-[450px] my-4 mx-auto">
       <div
         id="tabs"
         class="w-full flex items-center justify-center gap-4 py-2 px-4 bg-neutral-800 rounded-t-lg border-b border-emerald-400"
       >
-        <button class="font-medium text-emerald-400 opacity-100">Info</button>
-        <button class="font-medium opacity-50 hover:opacity-100">Badge</button>
+        <button class="font-medium text-emerald-400 hover:opacity-100" id="form-tab-btn">
+          Info
+        </button>
+        <button class="font-medium opacity-50 hover:opacity-100" id="badge-tab-btn">Badge</button>
       </div>
 
-      <form action="#">
+      <form action="#" id="form-tab">
         <div class="flex flex-col items-start gap-4 p-4 bg-neutral-900">
           <div class="w-full flex items-center justify-between gap-4">
             <label for="name" class="min-w-11">Name</label>
@@ -41,12 +43,12 @@
 
           <div class="flex flex-col items-start gap-1 w-full">
             <label for="github">Github Profile</label>
-            <input type="text" id="github" class="w-full px-1 text-black rounded" required />
+            <input type="text" id="github-username" class="w-full px-1 text-black rounded" />
           </div>
 
           <div class="flex flex-col items-start gap-1 w-full">
             <label for="twitter">Twitter Profile</label>
-            <input type="text" id="twitter" class="w-full px-1 text-black rounded" />
+            <input type="text" id="twitter-username" class="w-full px-1 text-black rounded" />
           </div>
         </div>
 
@@ -65,34 +67,33 @@
         </div>
       </form>
 
-      <div class="flex flex-col p-4 items-center gap-6 bg-neutral-900 sr-only">
-        <div class="flex flex-col items-center gap-1">
-          <h2 class="font-medium text-emerald-400" id="user-fullname-display">Wendell Kennddy</h2>
-          <span class="text-xs opacity-50" id="user-email-display">wkenneddy505@gmail.com</span>
-        </div>
-
-        <img
-          id="user-avatar"
-          src="https://github.com/wendell-kenneddy.png"
-          alt="User's avatar"
-          width="144"
-          height="144"
-          class="rounded-xl border border-emerald-400"
-        />
-
-        <div class="w-full flex items-center justify-center gap-4">
-          <div class="flex flex-col items-center gap-1">
-            <img src="/twitter-icon.svg" alt="Twitter icon" width="32" height="32" />
-            <span id="twitter-username" class="text-xs opacity-50">@lllshaka</span>
+      <div class="flex flex-col p-4 items-center gap-6 bg-neutral-900 sr-only" id="badge-tab">
+        <div
+          class="flex flex-col items-center pb-4 gap-6 border-b rounded-b-lg border-b-emerald-400"
+        >
+          <div class="flex flex-col items-center gap-1 py-2 px-4 rounded-lg bg-emerald-900">
+            <h2 class="font-medium" id="user-fullname-display">No name provided</h2>
+            <span class="text-xs opacity-50" id="user-email-display">No e-mail provided</span>
           </div>
 
-          <div class="flex flex-col items-center gap-1">
-            <img src="/github-icon.svg" alt="Github icon" width="32" height="32" />
-            <span id="github-username" class="text-xs opacity-50">wendell-kenneddy</span>
+          <div class="w-full flex items-center justify-center gap-4">
+            <div class="flex flex-col items-center gap-1">
+              <img src="/twitter-icon.svg" alt="Twitter icon" width="32" height="32" />
+              <span id="twitter-username" class="text-xs opacity-50">-- -- --</span>
+            </div>
+
+            <div class="flex flex-col items-center gap-1">
+              <img src="/github-icon.svg" alt="Github icon" width="32" height="32" />
+              <span id="github-username" class="text-xs opacity-50">-- -- --</span>
+            </div>
           </div>
         </div>
+
+        <canvas id="qrcode-container"></canvas>
       </div>
     </main>
+
+    <div class="hidden" id="screenshot-container"></div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
