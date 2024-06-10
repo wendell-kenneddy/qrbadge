@@ -1,5 +1,4 @@
-import { InferType, ValidationError, object, string } from "yup";
-import { ToastManager } from "./ToastManager";
+import { InferType, object, string } from "yup";
 
 const userSchema = object({
   name: string().required("Please"),
@@ -7,10 +6,10 @@ const userSchema = object({
     .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, "Please enter a valid email address.")
     .required("Please enter your e-mail."),
   githubUsername: string(),
-  twitterUsername: string().nullable(),
+  twitterUsername: string(),
 });
 
-interface UserData extends InferType<typeof userSchema> {}
+export interface UserData extends InferType<typeof userSchema> {}
 
 export class FormHandler {
   private readonly nameInput = document.getElementById("name") as HTMLInputElement;
@@ -21,18 +20,19 @@ export class FormHandler {
   private readonly twitterUsernameInput = document.getElementById(
     "twitter-username"
   ) as HTMLInputElement;
-  private readonly toastManager = new ToastManager();
 
-  handleSubmit(e: SubmitEvent): void {
-    let user: UserData | null = null;
-
+  handleSubmit(
+    e: SubmitEvent,
+    onValidationSuccess: (user: UserData) => void,
+    onError: (error: any) => void
+  ): void {
     e.preventDefault();
 
     try {
-      user = userSchema.validateSync(this.getUserData());
-      console.log(user);
+      const user = userSchema.validateSync(this.getUserData());
+      onValidationSuccess(user);
     } catch (error) {
-      error instanceof ValidationError && this.toastManager.trigger(error.message);
+      onError(error);
     }
   }
 
@@ -41,6 +41,17 @@ export class FormHandler {
     const email = this.emailInput.value;
     const githubUsername = this.githubUsernameInput.value;
     const twitterUsername = this.twitterUsernameInput.value;
-    return { name, email, githubUsername, twitterUsername };
+    return { name, email, ...this.parseSocialLinks({ githubUsername, twitterUsername }) };
+  }
+
+  private parseSocialLinks({
+    githubUsername,
+    twitterUsername,
+  }: Pick<UserData, "githubUsername" | "twitterUsername">) {
+    const defaultText = "Not provided";
+    return {
+      githubUsername: githubUsername ? githubUsername : defaultText,
+      twitterUsername: twitterUsername ? `@${twitterUsername}` : defaultText,
+    };
   }
 }
