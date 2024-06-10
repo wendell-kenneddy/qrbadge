@@ -66,7 +66,7 @@ export class App {
 
   private async createBadgeImage(): Promise<string> {
     const dataUrl = await domToImage.toPng(this.badgeContainer, {
-      width: 300,
+      width: 280,
     });
     return dataUrl;
   }
