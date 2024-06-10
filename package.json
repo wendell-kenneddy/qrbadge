@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/dom-to-image": "^2.6.7",
     "@types/qrcode": "^1.5.5",
     "@types/toastify-js": "^1.12.3",
     "autoprefixer": "^10.4.19",
@@ -19,7 +20,7 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "html2canvas": "^1.4.1",
+    "dom-to-image": "^2.6.0",
     "qrcode": "^1.5.3",
     "toastify-js": "^1.12.0",
     "yup": "^1.4.0"
