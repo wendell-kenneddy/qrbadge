@@ -55,6 +55,7 @@
         <div class="w-full flex items-center rounded-b-lg">
           <button
             class="w-1/2 py-2 font-medium bg-rose-800 rounded-bl-lg hover:bg-rose-600 transition-colors"
+            type="reset"
           >
             Cancel
           </button>
@@ -69,25 +70,62 @@
 
       <div class="flex flex-col p-4 items-center gap-6 bg-neutral-900 sr-only" id="badge-tab">
         <div
-          class="flex flex-col items-center pb-4 gap-6 border-b rounded-b-lg border-b-emerald-400"
+          class="flex flex-col items-center pb-4 gap-6 border-b border-b-emerald-400 w-[300px] bg-neutral-900"
+          id="badge-container"
         >
-          <div class="flex flex-col items-center gap-1 py-2 px-4 rounded-lg bg-emerald-900">
-            <h2 class="font-medium" id="user-fullname-display">No name provided</h2>
-            <span class="text-xs opacity-50" id="user-email-display">No e-mail provided</span>
+          <div class="py-2 px-4 rounded-b-lg bg-emerald-900 w-[300px]">
+            <h2
+              class="mb-2 text-nowrap font-medium text-center block text-sm"
+              id="user-fullname-display"
+            >
+              No name provided
+            </h2>
+
+            <span class="text-xs opacity-50 text-center block" id="user-email-display"
+              >No e-mail provided</span
+            >
           </div>
 
           <div class="w-full flex items-center justify-center gap-4">
-            <div class="flex flex-col items-center gap-1">
-              <img src="/twitter-icon.svg" alt="Twitter icon" width="32" height="32" />
-              <span id="twitter-username" class="text-xs opacity-50">-- -- --</span>
+            <div>
+              <img
+                src="/github-icon.svg"
+                alt="Github icon"
+                width="32"
+                height="32"
+                class="block w-8 mx-auto"
+              />
+              <span
+                id="github-username-display"
+                class="text-xs opacity-50 inline-block h-4 text-nowrap"
+                >Not provided</span
+              >
             </div>
 
-            <div class="flex flex-col items-center gap-1">
-              <img src="/github-icon.svg" alt="Github icon" width="32" height="32" />
-              <span id="github-username" class="text-xs opacity-50">-- -- --</span>
+            <div>
+              <img
+                src="/twitter-icon.svg"
+                alt="Twitter icon"
+                width="32"
+                height="32"
+                class="block w-8 mx-auto"
+              />
+              <span
+                id="twitter-username-display"
+                class="text-xs opacity-50 inline-block h-4 text-nowrap"
+                >Not provided</span
+              >
             </div>
           </div>
         </div>
+
+        <button
+          id="badge-download"
+          class="py-2 px-4 font-medium bg-emerald-600 hover:bg-emerald-400 rounded-lg transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:opacity-40 disabled:hover:bg-emerald-600"
+          disabled="true"
+        >
+          Download badge
+        </button>
 
         <canvas id="qrcode-container"></canvas>
       </div>
